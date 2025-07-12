@@ -25,7 +25,8 @@ namespace mu2e{
   void RobustDispatcher::Dispatch(const char* buf, ssize_t count){
     if (-1 < _fd){
       std::lock_guard<std::mutex> lock(_mutex);
-      if (write(_fd, buf, count) < count){
+      ssize_t written;
+      if ((written = write(_fd, buf, count)) < count){
         this->socket_disconnect();
         if (errno == EINTR){
           std::string msg = "received EINTR";
@@ -62,7 +63,7 @@ namespace mu2e{
         fd_set set;
         FD_ZERO(&set);
         FD_SET(_fd, &set);
-        struct timeval timeout{1, 0};
+        struct timeval timeout{0, 1};
         int selected;
         while ((selected = select(_fd + 1, NULL, &set, NULL, &timeout)) < 1){
           /**/

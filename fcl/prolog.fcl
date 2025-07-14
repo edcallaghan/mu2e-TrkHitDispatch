@@ -1,0 +1,12 @@
+BEGIN_PROLOG
+
+TrkHitDispatch: {
+  TrkHitDispatch: {
+    module_type: TrkHitDispatch
+    host: "localhost"
+    port: 14000
+    StrawDigiCollection: "makeSD"
+  }
+}
+
+END_PROLOG

@@ -26,5 +26,6 @@ include(BuildPlugins)
 add_subdirectory(src)
 
 install_headers(SUBDIRNAME TrkHitDispatch SUBDIRS inc)
+install_fhicl(SUBDIRS fcl SUBDIRNAME TrkHitDispatch/fcl)
 
 cet_cmake_config()
